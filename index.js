@@ -1,7 +1,18 @@
 const express = require("express");
-const app = express();
-const port = 3000;
+const dotenv = require("dotenv");
 
-app.listen(port, () => {
-  console.log(`Servidor rodando em http://localhost:${port}`);
-});
+class AppServer {
+  constructor() {
+    this.app = express();
+    dotenv.config();
+  }
+
+  initializeServer() {
+    this.app.listen(this.port, () => {
+      console.log(`Servidor rodando em http://localhost:${process.env.PORT}`);
+    });
+  }
+}
+
+const server = new AppServer();
+server.initializeServer();
