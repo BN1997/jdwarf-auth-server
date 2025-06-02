@@ -1,9 +1,12 @@
-const express = require("express");
-const dotenv = require("dotenv");
+import express from "express";
+import dotenv from "dotenv";
+import firebaseAdmin from "firebase-admin";
+import { firebaseConfig } from "./config/firebaseConfig.js";
 
 class AppServer {
   constructor() {
     this.app = express();
+    firebaseAdmin.initializeApp(firebaseConfig);
     dotenv.config();
   }
 
