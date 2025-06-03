@@ -1,6 +1,6 @@
 import BaseService from "./abstract/BaseService.js";
 
-export class TokenService extends BaseService {
+class TokenService extends BaseService {
     constructor() {
         super("token");
     }
@@ -14,3 +14,5 @@ export class TokenService extends BaseService {
         }
     }
 }
+
+export default new TokenService();
