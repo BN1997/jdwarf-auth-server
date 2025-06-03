@@ -8,6 +8,7 @@ class AppServer {
     this.app = express();
     firebaseAdmin.initializeApp(firebaseConfig);
     dotenv.config();
+    this.app.use(express.json());
   }
 
   initializeServer() {

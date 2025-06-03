@@ -1,4 +1,4 @@
-import { BaseService } from "./abstract/BaseService";
+import BaseService from "./abstract/BaseService.js";
 
 export class TokenService extends BaseService {
     constructor() {
@@ -14,5 +14,3 @@ export class TokenService extends BaseService {
         }
     }
 }
-
-module.exports = new TokenService();

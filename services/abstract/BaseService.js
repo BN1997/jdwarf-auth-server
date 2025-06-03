@@ -1,12 +1,12 @@
-import { db } from "../../external/firebase";
+import { db } from '../../external/FirebaseExternal.js';
 
-export class BaseService {
+export default class BaseService {
     constructor(nameCollection) {
         this.db = db;
         this.collectionName = nameCollection;
     }
 
-    getCollection() {    
+    getCollection() {
         return this.db.collection(this.collectionName);
     }
 }
