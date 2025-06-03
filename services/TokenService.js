@@ -1,4 +1,4 @@
-import BaseService from "./abstract/BaseService.js";
+import BaseService from "./abstract/BaseController.js";
 
 class TokenService extends BaseService {
     constructor() {
@@ -10,9 +10,19 @@ class TokenService extends BaseService {
             return await this.getCollection().doc(tokenId).get();
         } catch (error) {
             console.error("Error fetching token by tokenId:", error);
-            throw error;
+            throw new Error("Error fetching token by tokenId");
+        }
+    }
+
+    async updateToken(tokenId, data) {
+        try {
+            console.log("Updating token with ID:", tokenId);
+            return await this.getCollection().doc(tokenId).update(data);
+        } catch (error) {
+            console.error("Error updating token:", error);
+            throw new Error("Error updating token");
         }
     }
 }
 
-export default new TokenService();
+export default TokenService = new TokenService();

@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import firebaseAdmin from "firebase-admin";
-import TokenController from "./controllers/TokenController.js";
+import TokenRouter from "./routers/TokenRouter.js";
 import { firebaseConfig } from "./config/firebaseConfig.js";
 
 
@@ -12,7 +12,7 @@ class AppServer {
     dotenv.config();
 
     this.app.use(express.json());
-    this.app.use('/token', TokenController);
+    this.app.use('/token', TokenRouter.getRouter());
   }
 
   initializeServer() {
