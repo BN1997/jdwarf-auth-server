@@ -16,7 +16,6 @@ class TokenService extends BaseService {
 
     async updateToken(tokenId, data) {
         try {
-            console.log("Updating token with ID:", tokenId);
             return await this.getCollection().doc(tokenId).update(data);
         } catch (error) {
             console.error("Error updating token:", error);

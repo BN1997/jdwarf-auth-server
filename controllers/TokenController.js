@@ -33,7 +33,7 @@ class TokenController {
             const { tokenId } = req.params;
             const data = req.body;
 
-            await this.getCollection().doc(tokenId).update(data);
+            await TokenService.updateToken(tokenId, data);
             return res.status(200).json({ 
                 success: true, 
                 message: "Token updated successfully" 

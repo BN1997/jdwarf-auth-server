@@ -8,7 +8,7 @@ class TokenRouter extends BaseRouter {
 
   registerRoutes() {
     this.router.get("/getById/:tokenId", TokenController.getTokenById.bind(TokenController));
-    this.router.post("/token", TokenController.updateToken.bind(TokenController));
+    this.router.put("/update/:tokenId", TokenController.updateToken.bind(TokenController));
   }
 }
 
