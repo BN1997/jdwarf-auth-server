@@ -9,4 +9,16 @@ export default class BaseService {
     getCollection() {
         return this.db.collection(this.collectionName);
     }
+
+    getDocById(id) {
+        return this.getCollection().doc(id);
+    }
+
+    getById(id) {
+        try {
+            return this.getDocById(id).get();
+        } catch (error) {
+            throw new Error('error found at getById')
+        }
+    }
 }

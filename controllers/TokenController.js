@@ -1,48 +1,37 @@
 import TokenService from "../services/TokenService.js";
 
 class TokenController {
-    async getTokenById(req, res) {
+    async authToken(req, res) {
         try {
             const { tokenId } = req.params;
-            const token = await TokenService.getTokenById(tokenId);
+            const { deviceId } = req.body;
 
-            if (!token.exists) {
-                return res.status(404).json({ 
-                    success: false, 
-                    message: "Token not found" 
-                });
+            const result = await TokenService.getById(tokenId);
+            if (!result.exists) return res.status(400);
+            const token = result.data();
+
+            if (!token.device_id) {
+                Object.assign(token, { device_id: deviceId });
+
+                await TokenService
+                    .getDocById(tokenId)
+                    .update({ device_id: deviceId });
+            } else {
+               const getTokenByDeviceId = await TokenService
+                    .getCollection()
+                    .where("device_id", "==", deviceId)
+                    .get();
+
+                if (getTokenByDeviceId.empty) return res.status(401);
             }
 
-            console.log("token", token.data())
-
-            return res.status(200).json({ 
-                success: true, 
-                data: token.data() 
-            });
+            return res.status(200).json({
+                data: token
+            })
         } catch (error) {
-            console.error("Error fetching token by tokenId:", error);
             return res.status(500).json({ 
                 success: false, 
                 message: "Error fetching token by tokenId" 
-            });
-        }
-    }
-
-    async updateToken(req, res) {
-        try {
-            const { tokenId } = req.params;
-            const data = req.body;
-
-            await TokenService.updateToken(tokenId, data);
-            return res.status(200).json({ 
-                success: true, 
-                message: "Token updated successfully" 
-            });
-        } catch (error) {
-            console.error("Error updating token:", error);
-            return res.status(500).json({ 
-                success: false, 
-                message: "Error updating token" 
             });
         }
     }

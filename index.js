@@ -8,7 +8,7 @@ import { firebaseConfig } from "./config/firebaseConfig.js";
 class AppServer {
   constructor() {
     this.app = express();
-    firebaseAdmin.initializeApp(firebaseConfig);
+    //firebaseAdmin.initializeApp(firebaseConfig);
     dotenv.config();
 
     this.app.use(express.json());
